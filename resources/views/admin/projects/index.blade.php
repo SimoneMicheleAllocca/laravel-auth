@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -20,7 +20,20 @@
                     <td>{{ $project->description }}</td>
                     <td>{{ $project->slug }}</td>
                     <td>
-                        
+                        <div class="d-flex gap-2">
+                            
+                            <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-info btn-sm">Mostra</a>
+                            
+                            
+                            <a href="{{ route('admin.projects.edit', $project->slug) }}" class="btn btn-warning btn-sm">Modifica</a>
+                            
+                            
+                            <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST" onsubmit="return confirm('Vuoi davvero eliminare questo progetto?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
